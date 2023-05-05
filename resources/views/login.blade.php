@@ -13,4 +13,12 @@
         </label>
         <button type="submit" class="form__submit">Login</button>
     </form>
+
+    <style>
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    </style>
 @endsection

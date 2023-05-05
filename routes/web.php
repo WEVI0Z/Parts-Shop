@@ -22,4 +22,8 @@ Route::group(["middleware" => "unauthorized"], function() {
 
 Route::group(["middleware" => "authorized"], function() {
     Route::get("logout", [\App\Http\Controllers\UsersController::class, "logout"])->name("logout");
+
+    Route::group(["middleware" => "admin"], function () {
+        Route::match(["get", "post"], "parts/create", [\App\Http\Controllers\ProductsController::class, "createPart"])->name("create-part");
+    });
 });

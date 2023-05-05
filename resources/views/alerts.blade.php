@@ -8,7 +8,7 @@
     @endif
 
     @if($errors->any())
-        @foreach($errors as $error)
+        @foreach($errors->all() as $error)
             <ul class="errors">
                 <li>
                     <p class="error">{{$error}}</p>

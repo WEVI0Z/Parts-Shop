@@ -48,7 +48,7 @@ class UsersController extends Controller
 
             Auth::login($user);
 
-            return redirect()->route("main")->with("Register success");
+            return redirect()->route("main")->with("message", "Register success");
         }
 
         $title = "Register";
