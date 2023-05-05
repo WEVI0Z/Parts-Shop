@@ -14,3 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/", [\App\Http\Controllers\ProductsController::class, "main"])->name("main");
+
+Route::group(["middleware" => "unauthorized"], function() {
+    Route::match(["get", "post"], "login", [\App\Http\Controllers\UsersController::class, "login"])->name("login");
+    Route::match(["get", "post"], "register", [\App\Http\Controllers\UsersController::class, "register"])->name("register");
+});
+
+Route::group(["middleware" => "authorized"], function() {
+    Route::get("logout", [\App\Http\Controllers\UsersController::class, "logout"])->name("logout");
+});

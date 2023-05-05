@@ -11,6 +11,7 @@
     @include("header")
 
     <main>
+        @include("alerts")
         @yield("content")
     </main>
 </body>
