@@ -107,6 +107,8 @@ class ProductsController extends Controller
                     "info" => $request->parameters_info[$i],
                 ]);
             }
+
+            return redirect()->route("info", ["id" => $product->id]);
         }
 
         $title = "Create part";
@@ -117,7 +119,7 @@ class ProductsController extends Controller
     function catalog() {
         $title = "Catalog";
 
-        $parts = Product::query()->paginate(1);
+        $parts = Product::query()->paginate(9);
 
         $categories = $this->getCategories();
 
@@ -127,7 +129,7 @@ class ProductsController extends Controller
     function category(Request $request) {
         $title = "Catalog";
 
-        $parts = Product::query()->where("category", "=", $request->route("category"))->paginate(1);
+        $parts = Product::query()->where("category", "=", $request->route("category"))->paginate(9);
 
         $categories = $this->getCategories();
 

@@ -30,13 +30,15 @@
         </label>
 
         <div class="parameters">
-            Part parameters:
+            <h3>Part parameters:</h3>
             <ul class="parameters__list">
                 <li class="parameters__item parameter">
                     <label class="parameter__label">
+                        Spec name:
                         <input type="text" name="parameters_title[0]" id="" class="parameter__title">
                     </label>
                     <label class="parameter__label">
+                        Spec info:
                         <input type="text" name="parameters_info[0]" id="" class="parameter__info">
                     </label>
                 </li>
@@ -66,9 +68,11 @@
            parametersList.innerHTML += `
                 <li class="parameters__item parameter">
                     <label class="parameter__label">
+                        Spec name:
                         <input type="text" name="parameters_title[${counter}]" class="parameter__title">
                     </label>
                     <label class="parameter__label">
+                        Spec info:
                         <input type="text" name="parameters_info[${counter}]" class="parameter__info">
                     </label>
                 </li>
@@ -93,12 +97,4 @@
             parametersTitles = newParametersTitles;
         });
     </script>
-
-    <style>
-        .form {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-    </style>
 @endsection

@@ -77,7 +77,7 @@ class UsersController extends Controller
     function logout() {
         Auth::logout();
 
-        return redirect()->back()->with("message", "Logout success");
+        return redirect()->route("main")->with("message", "Logout success");
     }
 
     function favourites(Request $request) {
@@ -85,7 +85,7 @@ class UsersController extends Controller
 
         $parts = Product::with("favourites")->whereHas("favourites", function ($query) {
             $query->where("user_id", "=", Auth::user()->id);
-        })->paginate(1);
+        })->paginate(9);
 
         $categories = $this->getCategories();
 

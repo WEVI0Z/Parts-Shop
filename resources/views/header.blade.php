@@ -1,3 +1,43 @@
+<style>
+    .header {
+        width: 100%;
+
+        background-color: #edede9;
+    }
+
+    .header__navigation {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .header__links {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .header__link {
+        margin-right: 20px;
+    }
+
+    .header__buttons {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .header__button {
+        margin-right: 20px;
+        padding: 10px 20px;
+
+        color: white;
+
+        background-color: #d6ccc2;
+    }
+</style>
+
 <header class="header">
     <nav class="header__navigation">
         <a href="{{route("main")}}" class="header__main-link">
