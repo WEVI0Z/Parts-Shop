@@ -5,7 +5,7 @@
         </a>
         <ul class="header__links">
             <li><a href="{{route("catalog")}}" class="header__link">Catalog</a></li>
-            <li><a href="#" class="header__link">Info</a></li>
+            <li><a href="{{route("favourites")}}" class="header__link">Favourites</a></li>
             <li><a href="#" class="header__link">About us</a></li>
         </ul>
         <ul class="header__buttons">

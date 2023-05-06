@@ -7,5 +7,5 @@
             </li>
         @endforeach
     </ul>
-    <a href="#" class="popular__link">Show all</a>
+    <a href="{{route("catalog")}}" class="popular__link">Show all</a>
 </section>

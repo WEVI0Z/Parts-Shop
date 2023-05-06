@@ -18,6 +18,10 @@ class Product extends Model
     ];
 
     function parameters() {
-        $this->hasMany(Parameter::class);
+        return $this->hasMany(Parameter::class);
+    }
+
+    function favourites() {
+        return $this->hasMany(Favourite::class);
     }
 }

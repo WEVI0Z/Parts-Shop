@@ -2,13 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favourite;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+    private function getCategories() {
+        $products = Product::query()->select("category")->get();
+
+        $categories = [];
+
+        foreach ($products as $product) {
+            $categories[count($categories)] = $product->category;
+        }
+
+        $categories = array_unique($categories);
+
+        return $categories;
+    }
+
     function login(Request $request) {
         if($_POST) {
             if(Auth::attempt(["password" => $request->password, "login" => $request->login])) {
@@ -60,5 +78,26 @@ class UsersController extends Controller
         Auth::logout();
 
         return redirect()->back()->with("message", "Logout success");
+    }
+
+    function favourites(Request $request) {
+        $title = "Favourites";
+
+        $parts = Product::with("favourites")->whereHas("favourites", function ($query) {
+            $query->where("user_id", "=", Auth::user()->id);
+        })->paginate(1);
+
+        $categories = $this->getCategories();
+
+        return view("catalog", compact("title", "parts", "categories"));
+    }
+
+    function addToFavourites(Request $request) {
+        Favourite::query()->create([
+            "user_id" => Auth::user()->id,
+            "product_id" => $request->route("id"),
+        ]);
+
+        return redirect()->back()->with("message", "Product added to your favourites");
     }
 }

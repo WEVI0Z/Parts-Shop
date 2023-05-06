@@ -23,7 +23,30 @@ class ProductsController extends Controller
     }
 
     private function getPopular() {
-        return Product::query()->limit(3)->get();
+        $parts = [];
+
+        $products = Product::query()->get();
+
+        foreach ($products as $product) {
+            $likes = count($product->favourites);
+
+            $parts[count($parts)] = [$product->id => $likes];
+        }
+        sort($parts);
+
+        $parts = array_reverse($parts);
+
+        $products = [];
+
+        foreach ($parts as $part) {
+            if(count($products) < 3) {
+                $products[count($products)] = Product::find(key($part));
+            } else {
+                break;
+            }
+        }
+
+        return $products;
     }
 
     function main() {
@@ -109,5 +132,15 @@ class ProductsController extends Controller
         $categories = $this->getCategories();
 
         return view("catalog", compact("title", "parts", "categories"));
+    }
+
+    function info(Request $request) {
+        $part = Product::query()->find($request->route("id"));
+
+        $popularParts = $this->getPopular();
+
+        $title = $part->name;
+
+        return view("info", compact("title", "part", "popularParts"));
     }
 }

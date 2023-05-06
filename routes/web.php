@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [\App\Http\Controllers\ProductsController::class, "main"])->name("main");
 Route::get("/catalog", [\App\Http\Controllers\ProductsController::class, "catalog"])->name("catalog");
+Route::get("/part/{id}", [\App\Http\Controllers\ProductsController::class, "info"])->name("info");
 Route::get("/catalog/{category}", [\App\Http\Controllers\ProductsController::class, "category"])->name("category");
 
 Route::group(["middleware" => "unauthorized"], function() {
@@ -24,6 +25,8 @@ Route::group(["middleware" => "unauthorized"], function() {
 
 Route::group(["middleware" => "authorized"], function() {
     Route::get("logout", [\App\Http\Controllers\UsersController::class, "logout"])->name("logout");
+    Route::get("favourites", [\App\Http\Controllers\UsersController::class, "favourites"])->name("favourites");
+    Route::get("favourites/{id}", [\App\Http\Controllers\UsersController::class, "addToFavourites"])->name("add-to-favourites");
 
     Route::group(["middleware" => "admin"], function () {
         Route::match(["get", "post"], "parts/create", [\App\Http\Controllers\ProductsController::class, "createPart"])->name("create-part");
