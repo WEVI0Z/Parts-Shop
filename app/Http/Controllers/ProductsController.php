@@ -32,7 +32,14 @@ class ProductsController extends Controller
 
             $parts[count($parts)] = [$product->id => $likes];
         }
-        sort($parts);
+
+        usort($parts, function ($a, $b) {
+           if ($a[key($a)] >= $b[key($b)]) {
+               return 1;
+           } else {
+               return 0;
+           }
+        });
 
         $parts = array_reverse($parts);
 
