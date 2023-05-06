@@ -4,7 +4,7 @@
             <h1 class="header__title">Parts Shop</h1>
         </a>
         <ul class="header__links">
-            <li><a href="#" class="header__link">Catalog</a></li>
+            <li><a href="{{route("catalog")}}" class="header__link">Catalog</a></li>
             <li><a href="#" class="header__link">Info</a></li>
             <li><a href="#" class="header__link">About us</a></li>
         </ul>

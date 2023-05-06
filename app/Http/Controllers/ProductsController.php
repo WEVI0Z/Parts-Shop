@@ -9,11 +9,21 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     private function getCategories() {
-        return [1, 2, 3];
+        $products = Product::query()->select("category")->get();
+
+        $categories = [];
+
+        foreach ($products as $product) {
+            $categories[count($categories)] = $product->category;
+        }
+
+        $categories = array_unique($categories);
+
+        return $categories;
     }
 
     private function getPopular() {
-        return [1, 2, 3];
+        return Product::query()->limit(3)->get();
     }
 
     function main() {
@@ -79,5 +89,25 @@ class ProductsController extends Controller
         $title = "Create part";
 
         return view("create-part", compact("title"));
+    }
+
+    function catalog() {
+        $title = "Catalog";
+
+        $parts = Product::query()->paginate(1);
+
+        $categories = $this->getCategories();
+
+        return view("catalog", compact("title", "parts", "categories"));
+    }
+
+    function category(Request $request) {
+        $title = "Catalog";
+
+        $parts = Product::query()->where("category", "=", $request->route("category"))->paginate(1);
+
+        $categories = $this->getCategories();
+
+        return view("catalog", compact("title", "parts", "categories"));
     }
 }

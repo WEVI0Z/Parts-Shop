@@ -1,9 +1,9 @@
 <section class="categories">
     <ul class="categories__list">
-        @foreach($categories as $categorie)
+        @foreach($categories as $category)
             <li class="categories__item">
-                <a href="" class="categories__link">
-                    Mouse
+                <a href="{{route("category", ["category" => $category])}}" class="categories__link">
+                    {{$category}}
                 </a>
             </li>
         @endforeach

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/", [\App\Http\Controllers\ProductsController::class, "main"])->name("main");
+Route::get("/catalog", [\App\Http\Controllers\ProductsController::class, "catalog"])->name("catalog");
+Route::get("/catalog/{category}", [\App\Http\Controllers\ProductsController::class, "category"])->name("category");
 
 Route::group(["middleware" => "unauthorized"], function() {
     Route::match(["get", "post"], "login", [\App\Http\Controllers\UsersController::class, "login"])->name("login");
